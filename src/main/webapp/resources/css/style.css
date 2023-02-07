@@ -1,0 +1,44 @@
+.border{
+        border-radius: 3px;
+}
+.okButton{
+    border-radius: 3px;
+    background-color: #FECC54;
+    color: #000000;
+    float: right;
+    margin: 1%;
+    border: none;
+    width: 50px;
+    height: 40px;
+}
+.searchBar{
+    float: left;
+    margin: 1%;
+    outline: none;
+    display: block;
+    border: none;
+    height: 40px;
+    width: 83%
+}
+.oEmbed {
+    margin-right: 2%;
+    margin-left: 2%;
+    margin-top: 2%;
+    background-color: #FFFFFF;
+    text-align: left;
+}
+.body{
+    background-color: #E2E2E2;
+    padding: 2%;
+    height: 100%;
+}
+.bodyTable{
+    background-color: #FFFFFF;
+    padding: 1%
+    height: 100%
+}
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
