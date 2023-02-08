@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.isayaksh.oEmbed.entity.ResponseDto;
 import me.isayaksh.oEmbed.service.OembedService;
+import me.isayaksh.oEmbed.service.SearchHistoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +18,13 @@ import java.net.URISyntaxException;
 public class OembedController {
 
     private final OembedService oembedService;
+    private final SearchHistoryService searchHistoryService;
 
     @GetMapping("/")
     public String home(Model model){
         log.info("OembedController.home");
         model.addAttribute("response", new ResponseDto());
+        model.addAttribute("searchHistory",searchHistoryService.findAll());
         return "home";
     }
 
@@ -30,6 +33,7 @@ public class OembedController {
                          Model model) throws URISyntaxException {
         log.info("OembedController.search");
         model.addAttribute("response", oembedService.search(url));
+        model.addAttribute("searchHistory",searchHistoryService.findAll());
         return "home";
     }
 

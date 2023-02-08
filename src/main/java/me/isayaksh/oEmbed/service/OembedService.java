@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.isayaksh.oEmbed.entity.Provider;
 import me.isayaksh.oEmbed.entity.ResponseDto;
+import me.isayaksh.oEmbed.entity.SearchHistory;
 import me.isayaksh.oEmbed.repository.ProviderRepository;
+import me.isayaksh.oEmbed.repository.SearchHistoryRepository;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -25,6 +27,7 @@ import java.net.URISyntaxException;
 public class OembedService {
 
     private final ProviderRepository providerRepository;
+    private final SearchHistoryRepository searchHistoryRepository;
 
     /** oEmbed의 Provider를 초기화 **/
     @Transactional
@@ -72,12 +75,17 @@ public class OembedService {
 
         // (oEmbed JSON) → (ResponseDto) 변환 후 반환
         WebClient client = WebClient.create(requiredUrl);
-        return client.get()
+
+        ResponseDto dto = client.get()
                 .uri("?format=json&url=" + url)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToMono(ResponseDto.class)
                 .block();
+        SearchHistory searchHistory = SearchHistory.createSearchHistory(url, url);
+        searchHistoryRepository.save(searchHistory);
+
+        return dto;
     }
 
     /** parsing 결과 DB에 저장하기 **/
