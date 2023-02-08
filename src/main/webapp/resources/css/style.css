@@ -42,3 +42,12 @@ html, body {
     height: 100%;
     overflow: hidden;
 }
+
+.sideBanner {
+  position: absolute;
+  width: 300px;
+  top: 10vh;
+  right: 5vw;
+  background-color: #999900;
+  color: #fffffff;
+}

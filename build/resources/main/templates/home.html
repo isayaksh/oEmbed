@@ -29,6 +29,7 @@
                 검색 기록
             </div>
             <th:block th:if="${searchHistory != null}" th:each="history : ${searchHistory}">
+                <input type="hidden" th:value="${history.id}"/>
                 <a th:href="@{/search(url=${history.url})}" class="list-group-item list-group-item-action text-truncate" th:text="${history.url}"></a>
             </th:block>
         </div>
